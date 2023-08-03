@@ -21,7 +21,7 @@ def notify_new_response(sender, instance, **kwargs):
 
 
 @receiver(m2m_changed, sender=Declaration.accepted_response.through)
-def notify_accept_response(sender, instance, **kwargs):
+def notify_accept_response(sender, instance, send_mail_accept_response=None, **kwargs):
     """отправить письмо юзеру оставившего отклик"""
     if kwargs['action'] == "post_add":
         # instance в себе содержит измененный пост
