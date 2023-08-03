@@ -12,6 +12,15 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+import logging
+logger = logging.getLogger(__name__)
+
+import logging.config
+
+from dotenv import load_dotenv
+load_dotenv()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -172,3 +181,114 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+
+#Логирование
+
+LOGGING = {
+    'version': 1, #ключ version всегда определяется как 1, на текущий момент это единственно допустимое значение
+    'disable_existing_loggers': False, # контролирует работу существующей (стандартной) схемы логирования Django.
+
+    'formatters': { #простой формат записи сообщений. В данном случае это уровень логирования сообщения и само сообщение.
+        'simple': {
+            'format': '%(asctime)s %(levelname)s %(message)s', # пункт 1 часть 1
+        },
+        'warning_console': { # пункт 1 часть 2
+            'format': '%(asctime)s %(levelname)s %(message)s %(pathname)s', # %(exc_info)s - it is delete
+        },
+        'general_file': { # пункт 2
+            'format': '%(asctime)s %(levelname)s %(module)s %(message)s',
+        },
+        'error_file': { # пункт 3
+            'format': '%(asctime)s %(levelname)s %(message)s %(pathname)s %(exc_info)s',
+        },
+        'security_file': { # пункт 4
+            'format': '%(asctime)s %(levelname)s %(module)s %(message)s',
+        },
+        'error_mail': {  # пункт 5
+            'format': '%(asctime)s %(levelname)s %(message)s %(pathname)s',
+        },
+    },# Далее определен фильтр, который пропускает записи только в случае, когда DEBUG = True и False .
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
+    'handlers': {
+        'console': {  # пункт 1, отправляет сообщения  DEBUG выше в консоль
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],  # накладывается фильтр, определенный выше
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'console_warning': { # пункт 1, отправляет для сообщений WARNING
+            'level': 'WARNING',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'warning_console',
+        },
+        'console_error': {
+            'level': 'ERROR',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'error_file',
+        },
+        'file_general': { #2 в файл general выводятся сообщения
+            'level': 'INFO',
+            'filters': ['require_debug_false'],  # накладывается фильтр debug=false
+            'class': 'logging.FileHandler',
+            'filename': 'general.log',
+            'formatter': 'general_file',
+        },
+        'file_errors': { #3 в файл errors выводятся сообщения
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': 'errors.log',
+            'formatter': 'error_file',
+        },
+        'file_security': { # пункт 4, в файл security.log попадают сообщения
+            'class': 'logging.FileHandler',
+            'filename': 'security.log',
+            'formatter': 'security_file',
+        },
+        'mail_admins': { # пункт 5, отправка на почту сообщений ERROR
+            'level': 'ERROR',
+            'filters': ['require_debug_false'], # при debug_false
+            'class': 'django.utils.log.AdminEmailHandler',
+            'formatter': 'error_mail',
+        },
+    },
+    'loggers': {
+        'django': {  # Регистратор django отправляет все сообщения на консоль
+            'handlers': ['console', 'console_warning', 'console_error', 'file_general'],
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file_errors', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.server': {
+            'handlers': ['file_errors', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.template': {
+            'handlers': ['file_errors'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.db_backends': {
+            'handlers': ['file_errors'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.security': {
+            'handlers': ['file_security'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
