@@ -55,7 +55,7 @@ class Category(models.Model):
 class Declaration(models.Model):
     """Обявления"""
     user = models.ForeignKey(AUTH_USER_MODEL, verbose_name='Пользыватель', on_delete=models.CASCADE)
-    title = models.CharField('Заголовок', max_length=50)
+    title = models.CharField('Заголовок', max_length=100)
     text = models.TextField('Описание')
     category = models.ForeignKey(Category, verbose_name='категория', on_delete=models.CASCADE)
     date_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата пуболткации')

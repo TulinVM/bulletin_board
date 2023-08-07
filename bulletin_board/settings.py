@@ -15,11 +15,8 @@ from pathlib import Path
 import logging
 logger = logging.getLogger(__name__)
 
-import logging.config
-
 from dotenv import load_dotenv
 load_dotenv()
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,6 +30,7 @@ SECRET_KEY = 'u=rui&rwe%q+x6zxm=a4_0527cv1_((va%$nvd#j0br+nhf7p_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# ALLOWED_HOSTS = ['192.168.31.135']
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -187,13 +185,12 @@ DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 LOGGING = {
     'version': 1, #ключ version всегда определяется как 1, на текущий момент это единственно допустимое значение
     'disable_existing_loggers': False, # контролирует работу существующей (стандартной) схемы логирования Django.
-
     'formatters': { #простой формат записи сообщений. В данном случае это уровень логирования сообщения и само сообщение.
         'simple': {
             'format': '%(asctime)s %(levelname)s %(message)s', # пункт 1 часть 1
         },
         'warning_console': { # пункт 1 часть 2
-            'format': '%(asctime)s %(levelname)s %(message)s %(pathname)s', # %(exc_info)s - it is delete
+            'format': '%(asctime)s %(levelname)s %(message)s %(pathname)s %(exc_info)s',
         },
         'general_file': { # пункт 2
             'format': '%(asctime)s %(levelname)s %(module)s %(message)s',
