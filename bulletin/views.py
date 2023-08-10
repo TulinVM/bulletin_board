@@ -49,6 +49,7 @@ class DeclarationCategory(DetailView):
         # Контекст для списка новостей в текущей категории
         context['category'] = Declaration.objects.filter(category=id)
         context['category_name'] = Category.objects.get(pk=id)
+        context['category_name1'] = Category.objects.get(pk=id)
 
         return context
 

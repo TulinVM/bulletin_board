@@ -9,7 +9,7 @@ from django.urls import reverse
 
 class Author(models.Model):
     name = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE, unique=True, verbose_name='Автор')
-    # BulletinConfig = models.BigAutoField(DEFAULT_AUTO_FIELD)
+
 
     def __str__(self):
         return self.name.username
@@ -72,14 +72,14 @@ class Declaration(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = "Обявление"
-        verbose_name_plural = "Обявления"
+        verbose_name = "Объявление"
+        verbose_name_plural = "Объявления"
 
 
 class Reviews(models.Model):
     '''Отзывы'''
 
-    declaration = models.ForeignKey(Declaration, verbose_name='обявление', related_name='review_declaration',
+    declaration = models.ForeignKey(Declaration, verbose_name='объявление', related_name='review_declaration',
                                     on_delete=models.CASCADE, null=True)
     commentator = models.ForeignKey(AUTH_USER_MODEL, verbose_name='коментатор', on_delete=models.CASCADE)
     review = models.TextField('Отклик', max_length=3000)
