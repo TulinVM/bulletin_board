@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 
 
 @receiver(m2m_changed, sender=Declaration.response.through)
-def notify_new_response(sender, instance, **kwargs):
+def notify_new_response(sender, instance, send_mail_new_response=None, **kwargs):
     """отправить письмо автору поста после отклика"""
     if kwargs['action'] == "post_add":
         # instance в себе содержит измененный пост

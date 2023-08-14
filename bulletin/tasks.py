@@ -63,5 +63,6 @@ def newsletter():
             msg.attach_alternative(html_content, "text/html")  # добавляем html
             msg.send()  # отсылаем
             print('Еженедельная рассылка успешна отправлена')
+
         else:
             print('Новых постов нет')

@@ -20,7 +20,7 @@ class DeclarationList(ListView):
     template_name = 'Declaration.html'
     context_object_name = 'Declaration'
     ordering = ['-date_create']
-    paginate_by = 4
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

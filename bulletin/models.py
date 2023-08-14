@@ -53,7 +53,7 @@ class Category(models.Model):
 
 
 class Declaration(models.Model):
-    """Обявления"""
+    """Объявления"""
     user = models.ForeignKey(AUTH_USER_MODEL, verbose_name='Пользыватель', on_delete=models.CASCADE)
     title = models.CharField('Заголовок', max_length=100)
     text = models.TextField('Описание')
@@ -63,7 +63,7 @@ class Declaration(models.Model):
     accepted_response = models.ManyToManyField(AUTH_USER_MODEL, related_name='post_accepted_response', )
 
     file = models.FileField('Файл', upload_to="bulletin_file/", blank=True, null=True)
-    image = models.ImageField('Изобнажение', upload_to="image/", blank=True, null=True)
+    image = models.ImageField('Изображение', upload_to="image/", blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('DeclarationDetail', kwargs={'pk': self.pk})
@@ -78,10 +78,9 @@ class Declaration(models.Model):
 
 class Reviews(models.Model):
     '''Отзывы'''
-
     declaration = models.ForeignKey(Declaration, verbose_name='объявление', related_name='review_declaration',
                                     on_delete=models.CASCADE, null=True)
-    commentator = models.ForeignKey(AUTH_USER_MODEL, verbose_name='коментатор', on_delete=models.CASCADE)
+    commentator = models.ForeignKey(AUTH_USER_MODEL, verbose_name='комментатор', on_delete=models.CASCADE)
     review = models.TextField('Отклик', max_length=3000)
     review_date = models.DateTimeField(auto_now_add=True)
 

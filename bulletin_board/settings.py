@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'contact',
     'protect',
     'users',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

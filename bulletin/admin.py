@@ -21,5 +21,4 @@ class ReviewsAdmin(admin.ModelAdmin):
     list_display = ( 'commentator', 'review', 'review_date')
     list_display_links = ('review',)
 
-
 admin.site.register(Author)
