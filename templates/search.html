@@ -23,13 +23,13 @@ Search
             {{ Dec.date_create|date:'d M Y' }}
         </td>
         <td>
-            {{ Dec.title|truncatechars:50 }}
+            {{ Dec.title|truncatechars:150 }}
         </td>
         <td>
-            {{ Dec.user }}
+            {{ Dec.user|truncatechars:150 }}
         </td>
         <td>
-            {{Dec.category.name_ru}}
+            {{ Dec.category }}
         </td>
 
     </tr>
