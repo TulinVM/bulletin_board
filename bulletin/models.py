@@ -4,12 +4,10 @@ from datetime import datetime
 from bulletin_board.settings import AUTH_USER_MODEL
 from django.urls import reverse
 
-# class BulletinConfig(models.BigAutoField):
 
 
 class Author(models.Model):
     name = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE, unique=True, verbose_name='Автор')
-
 
     def __str__(self):
         return self.name.username
@@ -54,11 +52,11 @@ class Category(models.Model):
 
 class Declaration(models.Model):
     """Объявления"""
-    user = models.ForeignKey(AUTH_USER_MODEL, verbose_name='Пользыватель', on_delete=models.CASCADE)
+    user = models.ForeignKey(AUTH_USER_MODEL, verbose_name='Пользователь', on_delete=models.CASCADE)
     title = models.CharField('Заголовок', max_length=100)
     text = models.TextField('Описание')
     category = models.ForeignKey(Category, verbose_name='категория', on_delete=models.CASCADE)
-    date_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата пуболткации')
+    date_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     response = models.ManyToManyField(AUTH_USER_MODEL, related_name='post_response', )
     accepted_response = models.ManyToManyField(AUTH_USER_MODEL, related_name='post_accepted_response', )
 
@@ -78,6 +76,7 @@ class Declaration(models.Model):
 
 class Reviews(models.Model):
     '''Отзывы'''
+
     declaration = models.ForeignKey(Declaration, verbose_name='объявление', related_name='review_declaration',
                                     on_delete=models.CASCADE, null=True)
     commentator = models.ForeignKey(AUTH_USER_MODEL, verbose_name='комментатор', on_delete=models.CASCADE)

@@ -10,9 +10,9 @@ urlpatterns = [
     path('add/', DeclarationCreate.as_view(), name='create'),
     path('edit/<int:pk>', DeclarationUpdateView.as_view(), name='update'),
     path('delete/<int:pk>', DeclarationDeleteView.as_view(), name='delete'),
-    path('add_reviews/<int:pk>', AddReviews.as_view(), name='add_reviews'),
+    path('addreviews/<int:pk>', AddReviews.as_view(), name='addreviews'),
     path('mypage/<int:pk>', ReviewDetail.as_view(), name='review'),
     path('delete_review/<int:pk>', ReviewDelete.as_view(), name='delete_review'),
-    path('add_reviews/<int:pk>', user_response, name='post_response')
+    path('addreviews/<int:pk>', user_response, name='post_response')
 
 ]

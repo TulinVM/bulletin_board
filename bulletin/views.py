@@ -46,10 +46,9 @@ class DeclarationCategory(DetailView):
     def get_context_data(self, **kwargs):
         id = self.kwargs.get('pk')
         context = super().get_context_data(**kwargs)
-        # Контекст для списка новостей в текущей категории
+        # Контекст для списка объявлений в текущей категории
         context['category'] = Declaration.objects.filter(category=id)
         context['category_name'] = Category.objects.get(pk=id)
-        context['category_name1'] = Category.objects.get(pk=id)
 
         return context
 

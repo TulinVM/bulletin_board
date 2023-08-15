@@ -11,8 +11,8 @@ from django.urls import reverse_lazy
 class UserPage(LoginRequiredMixin, ListView):
     model = CustomUser
     context_object_name = 'profile'
-    template_name = 'mypage.html',
-    login_url = '/account/login/'
+    template_name = 'mypage.html'
+    login_url = '/accounts/login/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

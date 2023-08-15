@@ -3,13 +3,14 @@ from django.forms import TextInput, Select, DateInput
 from .models import Declaration, Category
 from users.models import CustomUser
 
+
 class DaclarationFilter(FilterSet):
-    title = CharFilter(field_name='title', lookup_expr='icontains', label=u'Поиск по заголовкам',
-                       widget=TextInput(attrs={'placeholder': 'название статьи', 'class': 'form-control'}))
+    title = CharFilter(field_name='title', lookup_expr='icontains', label=u'Поиск по объявлениям',
+                       widget=TextInput(attrs={'placeholder': 'название объявления', 'class': 'form-control'}))
 
     post_author = ModelChoiceFilter(field_name='user', queryset=CustomUser.objects.all(),
                                     label=u'Поиск поста по автору',
-                                    widget=Select(attrs={'placeholder': 'название статьи', 'class': 'form-control'}))
+                                    widget=Select(attrs={'placeholder': 'название объявления', 'class': 'form-control'}))
 
     start_date = DateFilter(field_name='date_create', lookup_expr='gt', label=u'Начальная дата',
                             widget=DateInput(attrs={'class': 'form-control', 'type': 'date'}))
@@ -21,8 +22,8 @@ class DaclarationFilter(FilterSet):
                                  widget=Select(attrs={'placeholder': 'Выбрать период', 'class': 'form-control'}))
 
     post_category = ModelChoiceFilter(field_name='category', queryset=Category.objects.all(),
-                                      label=u'Поиск категории',
-                                      widget=Select(attrs={'placeholder': 'Поиск категории', 'class': 'form-control'}))
+                                      label=u'Поиск по категории',
+                                      widget=Select(attrs={'placeholder': 'Поиск по категории', 'class': 'form-control'}))
 
     class Meta:
         model = Declaration

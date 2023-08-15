@@ -13,6 +13,7 @@ class DeclarationForm(ModelForm):
             }),
         }
 
+
 class AddReviewsForm(ModelForm):
     class Meta:
         model =Reviews
@@ -22,4 +23,5 @@ class AddReviewsForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Введите текст...'
             })
+
         }

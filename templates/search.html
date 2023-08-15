@@ -5,13 +5,13 @@ Search
 {% endblock title %}
 
 {% block title2 %}
-            <h3>Поиск по статям</h3>
+            <h3>Поиск по объявлениям</h3>
 
 {% endblock title2 %}
 
 {% block content %}
 <form method="GET">
-    {{filter.form}}
+    {{ filter.form }}
     <input class="btn btn-primary float-right" type="submit" value="найти">
 </form>
 {% for Dec in filter.qs %}
@@ -29,7 +29,7 @@ Search
             {{ Dec.user }}
         </td>
         <td>
-            {{Dec.category}}
+            {{Dec.category.name_ru}}
         </td>
 
     </tr>

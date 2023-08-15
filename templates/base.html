@@ -17,8 +17,8 @@
 
   <!-- Custom fonts for this template -->
   <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet " type="text/css">
-  <!--link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' -->
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
   <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
@@ -41,7 +41,7 @@
             <a class="nav-link" href="{% url 'mypage' %} ">Страничка пользователя</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-primary float-right" href="{% url 'create' %}">Добавить обявленние</a>
+            <a class="btn btn-primary float-right" href="{% url 'create' %}">Добавить объявление</a>
           </li>
           <li class="nav-item">
              <a class="btn btn-primary float-right" href="{% url 'contact' %}">Подписка на рассылку</a>
@@ -50,7 +50,7 @@
             <a class="nav-link" href="/admin">Административный вход</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-primary float-right" href="{% url 'search' %}">Поиск по статьям</a>
+            <a class="btn btn-primary float-right" href="{% url 'search' %}">Поиск по объявлениям</a>
           </li>
           <li class="nav-item">
             {% if user.is_authenticated %}
@@ -136,19 +136,19 @@
             </li>
           </ul>
 
-          <p class="copyright text-muted">Copyright &copy; Your Website 2020</p>
+          <p class="copyright text-muted">Copyright &copy; Your Website 2023</p>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
+  <!-- Bootstrap core JavaScript >
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-  <!-- Custom scripts for this template -->
+  <!-- Custom scripts for this template >
   <script src="{% static 'js/clean-blog.min.js' %}"></script>
-
+-->
 </body>
 
 </html>

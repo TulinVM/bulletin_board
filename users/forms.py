@@ -14,6 +14,7 @@ class MyLoginForm(LoginForm):
         self.fields['password'].widget = PasswordInput(
             attrs={'class': 'form-control', })
 
+
 class MySignupForm(SignupForm):
     # можно по разному переопределять форму. Так:
     email = forms.EmailField(
